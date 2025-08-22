@@ -1,0 +1,12 @@
+openapi: 3.0.3
+info:
+  title: SEO SaaS API
+  version: 0.1.0
+servers:
+  - url: http://localhost:4000/api
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200": { description: OK }
