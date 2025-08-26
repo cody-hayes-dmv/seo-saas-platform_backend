@@ -3,10 +3,6 @@ import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 import dotenv from "dotenv";
-import path from "path";
-import fs from "fs";
-import YAML from "yaml";
-import swaggerUi from "swagger-ui-express";
 import { router as api } from "./routes";
 import { errorHandler } from "./middleware/errorHandler";
 
@@ -22,10 +18,6 @@ export async function createServer() {
   app.use(morgan("dev"));
 
   app.get("/api/health", (_req, res) => res.json({ ok: true }));
-
-  const swaggerPath = path.join(process.cwd(), "src", "openapi.yaml");
-  const swaggerDoc = YAML.parse(fs.readFileSync(swaggerPath, "utf8"));
-  app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
   app.use("/api", api);
 
